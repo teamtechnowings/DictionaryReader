@@ -1,0 +1,45 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class JavaSwingButton {
+	public static JFrame f;
+	public static JTextField tid, tpass;
+	public static JLabel lmain, lid, lpass;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		f = new JFrame();
+		
+		lmain = new JLabel("Welcome to Tecknowings!");
+		t = new JTextField();
+		JButton b = new JButton("Click");
+		l.setBounds(125, 20, 150, 20);
+		t.setBounds(110, 50, 150, 20);
+		t.setLayout(null);
+		
+		b.setBounds(130, 130, 100, 40);
+		
+		
+		f.add(b);
+		f.add(t);
+		f.add(l);
+		f.setSize(400, 300);
+		f.setLayout(null);
+		f.setVisible(true);
+		
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				l.setText("TextBox Data: " + t.getText());
+				
+			}
+		});
+		
+		System.out.println("Done!");
+
+	}
+
+}

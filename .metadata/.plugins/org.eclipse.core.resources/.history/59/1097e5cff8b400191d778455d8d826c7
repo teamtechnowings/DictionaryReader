@@ -1,0 +1,25 @@
+package DictionaryReader;
+import java.util.HashMap;
+
+
+public class DictionaryReading {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String path = "C:\\Users\\rajesh\\Videos\\Desktop\\listofwords.txt";
+
+		DictionaryFunctions ob = new DictionaryFunctions();
+		HashMap map1 = new HashMap<>();
+		
+		ob.readFileByBytes(path);
+		
+		System.out.println();
+		
+		ob.readFileByLine(path);
+		
+		
+		
+	}
+
+}

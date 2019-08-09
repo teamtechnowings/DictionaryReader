@@ -1,0 +1,43 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class JavaSwingButton {
+	public static JTextField t;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JFrame f = new JFrame();
+		
+		t = new JTextField();
+		t.setBounds(130, 10, 10, 10);
+		f.add(t);
+		t.setSize(100, 100);
+		t.setLayout(null);
+		t.setVisible(true);
+		
+		JButton b = new JButton("Click");
+		b.setBounds(130, 130, 100, 40);
+		
+		
+		f.add(b);
+		
+		f.setSize(400, 300);
+		f.setLayout(null);
+		f.setVisible(true);
+		
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				t.setText("This is TextBox");
+				
+			}
+		});
+		
+		System.out.println("Done!");
+
+	}
+
+}

@@ -1,0 +1,53 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class JavaSwingButton {
+	public static JFrame f;
+	public static JTextField tid, tpass;
+	public static JLabel lmain, lid, lpass;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		f = new JFrame();
+
+		lmain = new JLabel("Welcome to Tecknowings!");
+		lid = new JLabel("Login ID:  ");
+		tid = new JTextField();
+		lpass = new JLabel("Password:  ");
+		tpass = new JTextField();
+		JButton b = new JButton("Login");
+		
+		lmain.setBounds(110, 20, 200, 20);
+		lid.setBounds(70, 50, 150, 20);
+		tid.setBounds(140, 50, 150, 20);
+		tid.setLayout(null);
+		
+		b.setBounds(130, 130, 100, 40);
+		
+		
+		f.add(b);
+		f.add(lmain);
+		f.add(lid);
+		f.add(tid);
+		f.add(lpass);
+		f.add(tpass);
+		f.setSize(400, 300);
+		f.setLayout(null);
+		f.setVisible(true);
+		
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				lmain.setText("TextBox Data: " + tid.getText());
+				
+			}
+		});
+		
+		System.out.println("Done!");
+
+	}
+
+}

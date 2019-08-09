@@ -1,0 +1,239 @@
+import java.util.*;
+import java.util.Map.Entry;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReaderSearching {
+
+	static FileInputStream in = null;
+	static ArrayList<String> arr = new ArrayList<String>();
+	static int brLength = 0;
+
+	public byte[] readFileBytes(String path) {
+		byte[] a = null;
+		FileInputStream in = null;
+		try {
+			in = new FileInputStream(path);
+			int br = 0;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			String lastSub = "";
+			while (true) {
+
+				byte[] b = new byte[1024];
+				int len = in.read(b);
+				if (len == -1) {
+					break;
+				}
+				baos.write(b, 0, len);
+
+			}
+			a = baos.toByteArray();
+			in.close();
+
+			baos.close();
+			return a;
+		} catch (IOException e) {
+
+		}
+		return a;
+	}
+
+	public static void SearchStrings(String str1, String str2, String str3) {
+		String str1Stat = "Not Found!";
+		String str2Stat = "Not Found!";
+		String str3Stat = "Not Found!";
+		int count = 0;
+
+		for (int i = 0; i < arr.size(); i++) {
+
+			String str = arr.get(i);
+
+			if (str.equals(str1)) {
+
+				str1Stat = "Found!";
+				count++;
+				if (count == 3)
+					break;
+
+			}
+			if (str.equals(str2)) {
+
+				str2Stat = "Found!";
+				count++;
+				if (count == 3)
+					break;
+
+			}
+			if (str.equals(str3)) {
+
+				str3Stat = "Found!";
+				count++;
+				if (count == 3)
+					break;
+
+			}
+
+		}
+
+		System.out.println(str1 + " : " + str1Stat);
+		System.out.println(str2 + " : " + str2Stat);
+		System.out.println(str3 + " : " + str3Stat);
+
+	}
+
+	public static void main2(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		String path = "C:/Users/rajesh/Videos/Desktop/listofwords.txt";
+
+		FileReaderSearching fr = new FileReaderSearching();
+		HashMap map = fr.readFile(path);
+		// sSystem.out.println(map);
+		// SearchStrings("azotized", "fringilla", "accipitral");
+
+		/*
+		 * Set<Entry<String,String>> set = map.entrySet();
+		 * Iterator<Entry<String, String>> itr = set.iterator();
+		 * while(itr.hasNext()){ System.out.println(itr.next()); }
+		 */
+
+		Set<Entry<String, String>> set = map.entrySet();
+		int i = 1;
+		for (Map.Entry<String, String> e : set) {
+			System.out.println(e.getKey() + " : " + i);
+			i++;
+		}
+		System.out.println("Done!!!");
+		System.out.println("dictionary " + map.size());
+		System.out.println("br length: " + brLength);
+
+	}
+
+	public static void main(String[] args) {
+		String path = "C:\\Users\\rajesh\\Videos\\Desktop\\listofwords.txt";
+		byte[] a=new FileReaderSearching().readFileBytes(path);
+		HashMap map3 = new HashMap<>();
+		String s = new String(a);
+	
+		FileReaderSearching ob = new FileReaderSearching();
+		ob.addToArrayList(map3, s, "");
+
+		System.out.println("Map3: " + map3);
+		System.out.println("Map3 Length: " + map3.size());
+		
+		// String path = "";
+		HashMap map = new HashMap();
+		BufferedReader br;
+		String line = "";
+		try {
+			br = new BufferedReader(new FileReader(new File(path)));
+			int num1 = 1;
+			while (true) {
+				line = br.readLine();
+				if (line == null) {
+					break;
+				}
+				map.put(line.toLowerCase(), num1);
+				System.out.println(num1 + " " + line);
+				num1++;
+			}
+			System.err.println("Number of rows " + num1);
+			System.out.println("MapSize: " + map.size());
+			br.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		FileReaderSearching fr = new FileReaderSearching();
+		HashMap map2 = fr.readFile(path);
+
+		Set<Entry<String, String>> set = map.entrySet();
+		int i = 1;
+		for (Map.Entry<String, String> e : set) {
+
+			map2.remove(e.getKey());
+		}
+		System.out.println("Final Map: " + map2);
+		System.out.println("Final Map size: " + map2.size());
+
+	}
+
+	public HashMap readFile(String path) {
+		HashMap dictionary = new HashMap();
+
+		FileInputStream in = null;
+		try {
+			in = new FileInputStream(path);
+			int br = 0;
+
+			String lastSub = "";
+			while (true) {
+
+				byte[] b = new byte[20];
+
+				br = in.read(b);
+				if (br == -1) {
+					break;
+				}
+				brLength = brLength + br;
+				String s = new String(b, 0, br);
+
+				if (lastSub.length() > 0) {
+					System.out.println();
+				}
+				addToArrayList(dictionary, s, lastSub);
+				int ind = s.lastIndexOf("\\r?\\n");
+				if (ind == (br - 1)) {
+					// System.err.println("Found Perfect String");
+					lastSub = "";
+				} else {
+					// System.out.println("CUT ");
+					lastSub = s.substring(ind + 2);
+
+				}
+
+			}
+
+			// System.out.println(arr);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return dictionary;
+
+	}
+
+	public void addToArrayList(HashMap dictionary, String dataString,
+			String lastSub) {
+		String[] tokens = dataString.split("\\r?\\n");
+		if (lastSub.length() > 0) {
+			tokens[0] = lastSub + tokens[0];
+			System.out.println(tokens[0] + "  " + lastSub);
+		}
+		for (int i = 0; i < tokens.length; i++) {
+			if (tokens[i].trim().length() > 0) {
+				dictionary.put(tokens[i].toLowerCase().trim(), 1);
+			}
+
+		}
+
+	}
+
+}

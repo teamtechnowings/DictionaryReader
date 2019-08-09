@@ -1,0 +1,21 @@
+package com.reader;
+import java.util.HashMap;
+
+public class SpellChecker {
+
+	public static void main(String[] args) {
+
+		String path = "src/words.txt";
+
+		DictionaryReader ob = new DictionaryReader();
+		HashMap map1 = new HashMap<>();
+
+		ob.readFileByBytes(path);
+
+		System.out.println();
+
+		ob.readFileByLine(path);
+
+	}
+
+}

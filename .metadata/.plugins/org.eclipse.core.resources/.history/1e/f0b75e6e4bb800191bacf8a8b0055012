@@ -1,0 +1,60 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+public class JavaSwingButton {
+	public static JFrame f;
+	public static JTextField tid;
+	public static JLabel lmain, lid, lpass, err;
+	public static JPasswordField tpass;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		f = new JFrame();
+
+		lmain = new JLabel("Welcome to Tecknowings!");
+		lid = new JLabel("Login ID:  ");
+		tid = new JTextField();
+		lpass = new JLabel("Password:  ");
+		tpass = new JPasswordField();
+		JButton b = new JButton("Login");
+		err = new JLabel("Output");
+		
+		lmain.setBounds(110, 20, 200, 20);
+		lid.setBounds(70, 50, 150, 20);
+		tid.setBounds(140, 50, 150, 20);
+		lpass.setBounds(70, 80, 150, 20);
+		tpass.setBounds(140, 80, 150, 20);
+		b.setBounds(130, 130, 100, 40);
+		err.setBounds(180, 190, 100, 40);
+		
+		
+		f.add(b);
+		f.add(lmain);
+		f.add(lid);
+		f.add(tid);
+		f.add(lpass);
+		f.add(tpass);
+		f.setSize(400, 300);
+		f.setLayout(null);
+		f.setVisible(true);
+		
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(lid.getText().isEmpty() || lpass.getText().isEmpty()){
+					err.setText("Enter Both ID & Password");
+				}else{
+					err.setText("ID: " + tid.getText() + ",  Pass: " + tpass.getText());
+				}
+				
+			}
+		});
+		
+		System.out.println("Done!");
+
+	}
+
+}
