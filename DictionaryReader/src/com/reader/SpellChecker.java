@@ -10,11 +10,7 @@ public class SpellChecker {
 		HashMap dictionary = new HashMap<>();
 		DictionaryReader ob = new DictionaryReader();
 		dictionary = ob.readFileByBytes(path);
-		String s="hello how are you ?";
-		String[] tokens=s.split(" ");
-		for (int i = 0; i < tokens.length; i++) {
-			System.out.println(tokens[i]+" "+dictionary.get(tokens[i]));
-		}
+		
 	}
 
 }
